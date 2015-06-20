@@ -111,7 +111,7 @@ $v-selection-item-border-radius: 0;
 		outline: none;
 		margin: 2px !important;
 		padding: 6px 12px 6px 12px;
-		border-radius: 7px 7px 7px 7px;
+		border-radius: 7px 7px 0px 0px;
 	}
 	
 	.passwordField {
@@ -147,6 +147,7 @@ $v-selection-item-border-radius: 0;
 
 	.snpt-header {
 		background: #3B5998;
+		color: #fff;
 		width: 55px;
 		height: 55px;
 		border-radius: 60px;
@@ -158,6 +159,7 @@ $v-selection-item-border-radius: 0;
 	.logoStyle {
 		font-size: 18px;
 		font-weight: bold;
+		color: #fff;
 		vertical-align: middle;
 		horizontal-align: middle;
 	    width: 35px !important;
@@ -167,6 +169,6 @@ $v-selection-item-border-radius: 0;
 	    display: block;
 	    margin: 0px auto 0.3em;
 	    border: 1px solid #C5C5C5;
-	    text-align: -moz-center;
+	    text-align: center;
 	}
 }
