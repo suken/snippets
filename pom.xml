@@ -290,8 +290,8 @@
 			                <classpathScope>compile</classpathScope>
 			                <mainClass>com.vaadin.sass.SassCompiler</mainClass>
 			                <arguments>
-			                    <argument>src/main/webapp/VAADIN/themes/mytheme/styles.scss</argument>
-			                    <argument>src/main/webapp/VAADIN/themes/mytheme/styles.css</argument>
+			                    <argument>src/main/webapp/VAADIN/themes/snippetstheme/styles.scss</argument>
+			                    <argument>src/main/webapp/VAADIN/themes/snippetstheme/styles.css</argument>
 			                </arguments>
 			            </configuration>
 			        </execution>
