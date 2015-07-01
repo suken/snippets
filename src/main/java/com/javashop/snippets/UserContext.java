@@ -68,9 +68,10 @@ public final class UserContext {
 	}
 
 	public static void login(final String userName, final String password) {
-		final UsernamePasswordAuthenticationToken token =
-				new UsernamePasswordAuthenticationToken(userName, password);
-		final Authentication authentication = ServiceRegistry.getService(AuthenticationManager.class).authenticate(token);
+		final UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+				userName, password);
+		final Authentication authentication = ServiceRegistry.getService(
+				AuthenticationManager.class).authenticate(token);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		updateContextForAuthenticatedUser();
 		Page.getCurrent().setLocation("/snippets/home");
@@ -83,14 +84,17 @@ public final class UserContext {
 	}
 
 	private static final boolean updateContextForAuthenticatedUser() {
-		final String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		final String userName = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		if (Strings.isNullOrEmpty(userName)) {
 			LOGGER.warn("Authenticated user doesnt exists.");
 			return false;
 		}
-		final User user = ServiceRegistry.getService(IUserService.class).getUserByUserName(userName);
+		final User user = ServiceRegistry.getService(IUserService.class)
+				.getUserByUserName(userName);
 		final Builder<String> builder = ImmutableList.builder();
-		final Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		final Collection<? extends GrantedAuthority> authorities = SecurityContextHolder
+				.getContext().getAuthentication().getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {
 			builder.add(grantedAuthority.getAuthority());
 		}

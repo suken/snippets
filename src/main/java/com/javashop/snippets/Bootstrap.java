@@ -20,7 +20,6 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 import com.javashop.snippets.data.User;
 
-
 /**
  * @author sukenshah
  *
@@ -28,19 +27,20 @@ import com.javashop.snippets.data.User;
 @Service
 public class Bootstrap {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Bootstrap.class.getName());
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(Bootstrap.class.getName());
 
-	//	@Resource
-	//	private IUserService userService;
+	// @Resource
+	// private IUserService userService;
 
 	private boolean enabled = false;
 	private String resourcePath;
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(final boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	public void setResourcePath(String path) {
+	public void setResourcePath(final String path) {
 		resourcePath = path;
 	}
 
@@ -58,15 +58,18 @@ public class Bootstrap {
 
 	private void loadUsers() throws IOException {
 		final CsvToBean<User> csvUserBeanMapper = new CsvToBean<User>();
-		final CSVReader reader = new CSVReader(new FileReader(new File(resourcePath + File.pathSeparator + "Users.csv")));
+		final CSVReader reader = new CSVReader(new FileReader(new File(
+				resourcePath + File.pathSeparator + "Users.csv")));
 		final ColumnPositionMappingStrategy<User> mappingStrategy = new ColumnPositionMappingStrategy<User>();
 		mappingStrategy.setType(User.class);
-		mappingStrategy.setColumnMapping(new String[]{"id", "uname", "firstName", "lastName"});
+		mappingStrategy.setColumnMapping(new String[] { "id", "uname",
+				"firstName", "lastName" });
 
-		final List<User> users = csvUserBeanMapper.parse(mappingStrategy, reader);
+		final List<User> users = csvUserBeanMapper.parse(mappingStrategy,
+				reader);
 		// save all users
 		for (final User user : users) {
-			//			userService.create(user);
+			// userService.create(user);
 		}
 	}
 }

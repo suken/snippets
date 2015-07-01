@@ -23,7 +23,8 @@ public class MenuItemButton extends Button implements ISnippetMenuItem {
 	@Getter
 	private final Class<? extends View> viewClass;
 
-	public MenuItemButton(final String key, final String display, final Resource icon, final Class<? extends View> clazz) {
+	public MenuItemButton(final String key, final String display,
+			final Resource icon, final Class<? extends View> clazz) {
 		navigationKey = key;
 		displayText = display;
 		viewClass = clazz;

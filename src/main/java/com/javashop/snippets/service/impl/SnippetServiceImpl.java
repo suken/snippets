@@ -21,57 +21,60 @@ import com.javashop.snippets.service.ISnippetService;
  * @author sukenshah
  */
 @Component
-public class SnippetServiceImpl extends BaseDaoServiceImpl<Snippet> implements ISnippetService {
+public class SnippetServiceImpl extends BaseDaoServiceImpl<Snippet> implements
+ISnippetService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
-	public List<SnippetSummary> getLatestSnippets(int numberOfSnippets) {
+	public List<SnippetSummary> getLatestSnippets(final int numberOfSnippets) {
 		return getAllSnippets();
 	}
 
 	@Override
-	public List<SnippetSummary> getLatestSnippets(int numberOfSnippets,
-			Tag... tags) {
+	public List<SnippetSummary> getLatestSnippets(final int numberOfSnippets,
+			final Tag... tags) {
 		return getAllSnippets();
 	}
 
 	@Override
-	public List<SnippetSummary> getPopularSnippets(int numberOfSnippets) {
+	public List<SnippetSummary> getPopularSnippets(final int numberOfSnippets) {
 		// TODO Auto-generated method stub
 		return getAllSnippets();
 	}
 
 	@Override
-	public List<SnippetSummary> getUserSnippets(int numberOfSnippets,
-			Long userId) {
+	public List<SnippetSummary> getUserSnippets(final int numberOfSnippets,
+			final Long userId) {
 		return getAllSnippets();
 	}
 
 	@Override
-	public void likeSnippet(Snippet snippet, User user) {
+	public void likeSnippet(final Snippet snippet, final User user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void unlikeSnippet(Snippet snippet, User user) {
+	public void unlikeSnippet(final Snippet snippet, final User user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void viewedSnippet(Snippet snippet, User user) {
+	public void viewedSnippet(final Snippet snippet, final User user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@SuppressWarnings("unchecked")
 	private List<SnippetSummary> getAllSnippets() {
-		final Query query = entityManager.createQuery("select new "
-				+ SnippetSummary.class.getName() + " (s.id, s.name, s.description, s.createdOn, s.authorId, s.author.userName, s.noOfViews, s.noOfLikes, s.noOfComments)"
-				+ " from " + Snippet.class.getName() + " s ");
+		final Query query = entityManager
+				.createQuery("select new "
+						+ SnippetSummary.class.getName()
+						+ " (s.id, s.name, s.description, s.createdOn, s.authorId, s.author.userName, s.noOfViews, s.noOfLikes, s.noOfComments)"
+						+ " from " + Snippet.class.getName() + " s ");
 		return query.getResultList();
 	}
 }

@@ -9,8 +9,6 @@ import org.vaadin.aceeditor.AceTheme;
 
 import com.javashop.snippets.data.Snippet;
 import com.javashop.snippets.data.User;
-import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.navigator.View;
@@ -18,7 +16,6 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -28,7 +25,6 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
 
 /**
  * @author sukenshah
@@ -78,13 +74,8 @@ public class SnippetDetailsView extends VerticalLayout implements View {
 		modes.addItems(AceMode.values());
 		modes.setValue(AceMode.java);
 		modes.setNullSelectionAllowed(false);
-		modes.addValueChangeListener(new ValueChangeListener() {
-			private static final long serialVersionUID = -8643428579399455075L;
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-				editorField.setMode((AceMode) event.getProperty().getValue());
-			}
+		modes.addValueChangeListener((event) -> {
+			editorField.setMode((AceMode) event.getProperty().getValue());
 		});
 		editorOptions.addComponent(modes, 0, 0);
 
@@ -92,13 +83,8 @@ public class SnippetDetailsView extends VerticalLayout implements View {
 		themes.addItems(AceTheme.values());
 		themes.setValue(AceTheme.eclipse);
 		themes.setNullSelectionAllowed(false);
-		themes.addValueChangeListener(new ValueChangeListener() {
-			private static final long serialVersionUID = -4300745640729995484L;
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-				editorField.setTheme((AceTheme) event.getProperty().getValue());
-			}
+		themes.addValueChangeListener((event) -> {
+			editorField.setTheme((AceTheme) event.getProperty().getValue());
 		});
 		editorOptions.addComponent(themes, 1, 0);
 		editorOptions.setSpacing(true);
@@ -107,7 +93,8 @@ public class SnippetDetailsView extends VerticalLayout implements View {
 
 		layout.addComponent(editorField);
 
-		final BeanFieldGroup<Snippet> fieldGroup = new BeanFieldGroup<Snippet>(Snippet.class);
+		final BeanFieldGroup<Snippet> fieldGroup = new BeanFieldGroup<Snippet>(
+				Snippet.class);
 		final Snippet snippet = new Snippet();
 		snippet.setAuthor(UI.getCurrent().getSession().getAttribute(User.class));
 		snippet.setName("");
@@ -118,28 +105,20 @@ public class SnippetDetailsView extends VerticalLayout implements View {
 		fieldGroup.bind(editorField, "code");
 
 		final GridLayout buttonPanel = new GridLayout(2, 1);
-		final Button okButton = new Button("Ok", new Button.ClickListener() {
-			private static final long serialVersionUID = -5243175042837188796L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				try {
-					fieldGroup.commit();
-					// make service call here to save the data
-				} catch (final CommitException exception) {
-					new Notification("Error while saving snippet. Exception = " + exception, Type.ERROR_MESSAGE).show(Page.getCurrent());
-				}
+		final Button okButton = new Button("Ok", (event) -> {
+			try {
+				fieldGroup.commit();
+				// make service call here to save the data
+			} catch (final CommitException exception) {
+				new Notification("Error while saving snippet. Exception = "
+						+ exception, Type.ERROR_MESSAGE).show(Page
+								.getCurrent());
 			}
 		});
 		buttonPanel.addComponent(okButton, 0, 0);
 
-		final Button cancelButton = new Button("Cancel", new Button.ClickListener() {
-			private static final long serialVersionUID = -5243175042837188796L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				fieldGroup.discard();
-			}
+		final Button cancelButton = new Button("Cancel", (event) -> {
+			fieldGroup.discard();
 		});
 		buttonPanel.addComponent(cancelButton, 1, 0);
 		buttonPanel.setSpacing(true);
@@ -149,7 +128,7 @@ public class SnippetDetailsView extends VerticalLayout implements View {
 	}
 
 	@Override
-	public void enter(ViewChangeEvent event) {
+	public void enter(final ViewChangeEvent event) {
 		init();
 	}
 

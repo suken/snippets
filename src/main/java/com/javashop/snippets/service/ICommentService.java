@@ -5,7 +5,6 @@ package com.javashop.snippets.service;
 
 import com.javashop.snippets.data.Comment;
 
-
 /**
  * @author sukenshah
  *

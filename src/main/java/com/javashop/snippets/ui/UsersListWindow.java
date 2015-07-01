@@ -22,7 +22,7 @@ public class UsersListWindow extends Window {
 
 	private final VerticalLayout layout;
 
-	public UsersListWindow(final String title, List<User> users) {
+	public UsersListWindow(final String title, final List<User> users) {
 		setCaptionAsHtml(true);
 		setCaption("<b>" + title + "</b>");
 		layout = new VerticalLayout();
@@ -31,9 +31,11 @@ public class UsersListWindow extends Window {
 
 		for (final User user : users) {
 			final HorizontalLayout userLayout = new HorizontalLayout();
-			//			userLayout.addComponent(new Image("", new ThemeResource("images/FemaleUser.png")));
-			userLayout.addComponent(new Label(FontAwesome.USER.getHtml() + " " + user.getFirstName()
-					+ " " + user.getLastName(), ContentMode.HTML));
+			// userLayout.addComponent(new Image("", new
+			// ThemeResource("images/FemaleUser.png")));
+			userLayout.addComponent(new Label(FontAwesome.USER.getHtml() + " "
+					+ user.getFirstName() + " " + user.getLastName(),
+					ContentMode.HTML));
 			layout.addComponent(userLayout);
 		}
 	}

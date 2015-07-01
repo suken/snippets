@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.javashop.snippets.ui;
 
@@ -9,7 +9,8 @@ import com.vaadin.ui.VerticalLayout;
  * @author sukenshah
  *
  */
-public abstract class AbstractTab extends VerticalLayout implements ILazyInitializedTab {
+public abstract class AbstractTab extends VerticalLayout implements
+ILazyInitializedTab {
 
 	private static final long serialVersionUID = -3520895620462229745L;
 
@@ -22,7 +23,7 @@ public abstract class AbstractTab extends VerticalLayout implements ILazyInitial
 		initTab();
 		initialized = true;
 	}
-	
+
 	protected abstract void initTab();
 
 }

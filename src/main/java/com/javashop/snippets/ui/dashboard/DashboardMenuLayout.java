@@ -48,7 +48,7 @@ public class DashboardMenuLayout extends HorizontalLayout {
 		return contentArea;
 	}
 
-	public void addMenu(Component menu) {
+	public void addMenu(final Component menu) {
 		menu.addStyleName("valo-menu-part");
 		menuArea.addComponent(menu);
 	}

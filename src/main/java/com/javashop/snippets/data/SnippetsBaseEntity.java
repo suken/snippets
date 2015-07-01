@@ -57,9 +57,8 @@ public abstract class SnippetsBaseEntity extends GeneratedKeyBaseEntity {
 
 	@PreUpdate
 	@PrePersist
-	void modifiedTime()
-	{
+	void modifiedTime() {
 		modifiedOn = Calendar.getInstance().getTime();
-		//		setModifier((User) SecurityContext.getAuthenticatedUser());
+		// setModifier((User) SecurityContext.getAuthenticatedUser());
 	}
 }

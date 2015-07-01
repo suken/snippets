@@ -45,7 +45,8 @@ public class SnippetExtInfo extends SnippetsBaseEntity {
 	@JoinColumn(name = "snippetId")
 	private final Snippet snippet;
 
-	public SnippetExtInfo(InfoType type, User user, Snippet snippet) {
+	public SnippetExtInfo(final InfoType type, final User user,
+			final Snippet snippet) {
 		this.type = type;
 		this.user = user;
 		userId = user.getId();
@@ -54,7 +55,6 @@ public class SnippetExtInfo extends SnippetsBaseEntity {
 	}
 
 	public enum InfoType {
-		LIKE,
-		VIEWS;
+		LIKE, VIEWS;
 	}
 }

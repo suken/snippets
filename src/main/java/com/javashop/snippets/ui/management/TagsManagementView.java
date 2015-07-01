@@ -19,8 +19,9 @@ public class TagsManagementView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 4780736395660048632L;
 
 	@Override
-	public void enter(ViewChangeEvent event) {
-		new Notification("Under construction", Type.HUMANIZED_MESSAGE).show(Page.getCurrent());
+	public void enter(final ViewChangeEvent event) {
+		new Notification("Under construction", Type.HUMANIZED_MESSAGE)
+		.show(Page.getCurrent());
 	}
 
 }

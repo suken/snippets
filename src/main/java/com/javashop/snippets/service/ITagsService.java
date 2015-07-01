@@ -13,6 +13,6 @@ import com.javashop.snippets.data.Tag;
  */
 public interface ITagsService extends IDaoService<Tag> {
 
-	List<Tag> getTags(Long userId);
+	List<Tag> getTags(final Long userId);
 
 }

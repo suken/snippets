@@ -21,7 +21,7 @@ public class StringGenerator {
 		"fugiat", "nulla", "pariatur" };
 	int stringCount = -1;
 
-	public String nextString(boolean capitalize) {
+	public String nextString(final boolean capitalize) {
 		if (++stringCount >= strings.length) {
 			stringCount = 0;
 		}

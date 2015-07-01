@@ -16,18 +16,20 @@ import com.javashop.snippets.data.User;
  */
 public interface ISnippetService extends IDaoService<Snippet> {
 
-	List<SnippetSummary> getLatestSnippets(int numberOfSnippets);
+	List<SnippetSummary> getLatestSnippets(final int numberOfSnippets);
 
-	List<SnippetSummary> getLatestSnippets(int numberOfSnippets, Tag...tags);
+	List<SnippetSummary> getLatestSnippets(final int numberOfSnippets,
+			final Tag... tags);
 
-	List<SnippetSummary> getPopularSnippets(int numberOfSnippets);
+	List<SnippetSummary> getPopularSnippets(final int numberOfSnippets);
 
-	List<SnippetSummary> getUserSnippets(int numberOfSnippets, Long userId);
+	List<SnippetSummary> getUserSnippets(final int numberOfSnippets,
+			final Long userId);
 
-	void likeSnippet(Snippet snippet, User user);
+	void likeSnippet(final Snippet snippet, final User user);
 
-	void unlikeSnippet(Snippet snippet, User user);
+	void unlikeSnippet(final Snippet snippet, final User user);
 
-	void viewedSnippet(Snippet snippet, User user);
+	void viewedSnippet(final Snippet snippet, final User user);
 
 }

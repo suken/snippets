@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import com.javashop.snippets.UserContext;
 import com.javashop.snippets.data.User;
-import com.javashop.snippets.ui.StringGenerator;
 import com.javashop.snippets.ui.menu.ISnippetMenuItem;
 import com.javashop.snippets.ui.menu.MenuItemButton;
 import com.javashop.snippets.ui.menu.MenuItemsProvider;
@@ -18,21 +17,18 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
-import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
- *@author sukenshah
+ * @author sukenshah
  */
 @Theme("snippetstheme")
 @Widgetset("com.javashop.snippets.SnippetsWidgetset")
@@ -46,6 +42,7 @@ public class Dashboard extends UI {
 	{
 		menu.setId("testMenu");
 	}
+
 	private Navigator navigator;
 	private MenuItemsProvider menuProvider;
 
@@ -77,7 +74,8 @@ public class Dashboard extends UI {
 
 		for (final ISnippetMenuItem menuItem : menuProvider.getMenuItems()) {
 			if (menuItem.isNavigable())
-				navigator.addView(menuItem.getNavigationKey(), menuItem.getViewClass());
+				navigator.addView(menuItem.getNavigationKey(),
+						menuItem.getViewClass());
 		}
 
 		final String f = Page.getCurrent().getUriFragment();
@@ -99,7 +97,8 @@ public class Dashboard extends UI {
 						.hasNext();) {
 					it.next().removeStyleName("selected");
 				}
-				menuProvider.getMenuItem(event.getViewName()).addStyleName("selected");
+				menuProvider.getMenuItem(event.getViewName()).addStyleName(
+						"selected");
 				menu.removeStyleName("valo-menu-visible");
 			}
 		});
@@ -126,8 +125,7 @@ public class Dashboard extends UI {
 		top.setWidth("100%");
 		top.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
 		top.addStyleName("valo-menu-title");
-		final Label title = new Label(
-				"<h3>Snippets</h3>", ContentMode.HTML);
+		final Label title = new Label("<h3>Snippets</h3>", ContentMode.HTML);
 		title.setSizeUndefined();
 		top.addComponent(title);
 		top.setExpandRatio(title, 1);
@@ -135,18 +133,12 @@ public class Dashboard extends UI {
 
 		final MenuBar settings = new MenuBar();
 		settings.addStyleName("user-menu");
-		new StringGenerator();
 		final User user = UserContext.getCurrentUser();
-		final MenuItem settingsItem = settings.addItem(user.getFirstName() + " " + user.getLastName(),
-				new ThemeResource("images/profile-pic-300px.jpg"),
-				null);
-		settingsItem.addItem("Sign Out", new Command() {
-			private static final long serialVersionUID = -113372039137573781L;
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				UserContext.logoutCurrentUser();
-			}
+		final MenuItem settingsItem = settings.addItem(user.getFirstName()
+				+ " " + user.getLastName(), new ThemeResource(
+						"images/profile-pic-300px.jpg"), null);
+		settingsItem.addItem("Sign Out", (selectedItem) -> {
+			UserContext.logoutCurrentUser();
 		});
 		menu.addComponent(settings);
 
@@ -155,13 +147,8 @@ public class Dashboard extends UI {
 
 		for (final ISnippetMenuItem item : menuProvider.getMenuItems()) {
 			if (item.isNavigable()) {
-				((MenuItemButton) item).addClickListener(new ClickListener() {
-					private static final long serialVersionUID = -6638347383370146515L;
-
-					@Override
-					public void buttonClick(ClickEvent event) {
-						navigator.navigateTo(item.getNavigationKey());
-					}
+				((MenuItemButton) item).addClickListener((event) -> {
+					navigator.navigateTo(item.getNavigationKey());
 				});
 			}
 			menuItemsLayout.addComponent(item);

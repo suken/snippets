@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
-
 /**
  * @author sukenshah
  * @param <T>
@@ -20,7 +19,8 @@ public final class ServiceRegistry {
 
 	private static final Map<Class<?>, Object> mappings = Maps.newHashMap();
 
-	public static ServiceRegistry createRegistry(ArrayList<ServiceInfo> services) {
+	public static ServiceRegistry createRegistry(
+			final ArrayList<ServiceInfo> services) {
 		if (instance != null)
 			return instance;
 		instance = new ServiceRegistry();
@@ -28,7 +28,9 @@ public final class ServiceRegistry {
 		for (final ServiceInfo info : services) {
 			try {
 				if (mappings.containsKey(info.getServiceType()))
-					throw new IllegalArgumentException("Cannot register service multiple times. Service class = " + info.getServiceType());
+					throw new IllegalArgumentException(
+							"Cannot register service multiple times. Service class = "
+									+ info.getServiceType());
 				mappings.put(info.getServiceType(), info.getService());
 			} catch (final ClassNotFoundException e) {
 				throw new IllegalArgumentException("Cant find service class.");
@@ -38,9 +40,10 @@ public final class ServiceRegistry {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T getService(Class<T> type) {
+	public static <T> T getService(final Class<T> type) {
 		if (!mappings.containsKey(type))
-			throw new IllegalArgumentException("No service regsitered for " + type);
+			throw new IllegalArgumentException("No service regsitered for "
+					+ type);
 		return (T) mappings.get(type);
 	}
 

@@ -54,7 +54,6 @@ public class User extends GeneratedKeyBaseEntity {
 	private List<Tag> tags;
 
 	public enum Gender {
-		MALE,
-		FEMALE;
+		MALE, FEMALE;
 	}
 }

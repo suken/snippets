@@ -19,8 +19,9 @@ public class UsersManagementView extends VerticalLayout implements View {
 	private static final long serialVersionUID = -988236431710328071L;
 
 	@Override
-	public void enter(ViewChangeEvent event) {
-		new Notification("Under construction", Type.HUMANIZED_MESSAGE).show(Page.getCurrent());
+	public void enter(final ViewChangeEvent event) {
+		new Notification("Under construction", Type.HUMANIZED_MESSAGE)
+		.show(Page.getCurrent());
 	}
 
 }

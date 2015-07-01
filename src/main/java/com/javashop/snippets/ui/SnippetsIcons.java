@@ -30,12 +30,12 @@ import com.vaadin.server.ThemeResource;
  */
 public class SnippetsIcons {
 
-	private static List<FontAwesome> ICONS = Collections.unmodifiableList(Arrays
-			.asList(FontAwesome.values()));
+	private static List<FontAwesome> ICONS = Collections
+			.unmodifiableList(Arrays.asList(FontAwesome.values()));
 
 	private int iconCount = 0;
 
-	public SnippetsIcons(int startIndex) {
+	public SnippetsIcons(final int startIndex) {
 		iconCount = startIndex;
 	}
 
@@ -43,11 +43,11 @@ public class SnippetsIcons {
 		return get(false, 32);
 	}
 
-	public Resource get(boolean isImage) {
+	public Resource get(final boolean isImage) {
 		return get(isImage, 32);
 	}
 
-	public Resource get(boolean isImage, int imageSize) {
+	public Resource get(final boolean isImage, final int imageSize) {
 		if (!isImage) {
 			if (++iconCount >= ICONS.size()) {
 				iconCount = 0;

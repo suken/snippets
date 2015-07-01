@@ -15,7 +15,8 @@ import com.javashop.snippets.service.IDaoService;
  * @author sukenshah
  *
  */
-public abstract class BaseDaoServiceImpl<T extends GeneratedKeyBaseEntity> implements IDaoService<T> {
+public abstract class BaseDaoServiceImpl<T extends GeneratedKeyBaseEntity>
+implements IDaoService<T> {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -23,12 +24,12 @@ public abstract class BaseDaoServiceImpl<T extends GeneratedKeyBaseEntity> imple
 
 	@SuppressWarnings("unchecked")
 	public BaseDaoServiceImpl() {
-		this.entityType =
-				(Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		this.entityType = (Class<T>) ((ParameterizedType) getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
 	@Override
-	public final T create(T entity) {
+	public final T create(final T entity) {
 		if (entity == null || entity.getId() != null)
 			throw new IllegalArgumentException("Cannot create entity.");
 		entityManager.persist(entity);
@@ -37,14 +38,14 @@ public abstract class BaseDaoServiceImpl<T extends GeneratedKeyBaseEntity> imple
 	}
 
 	@Override
-	public final T update(T entity) {
+	public final T update(final T entity) {
 		if (entity == null || entity.getId() == null)
 			throw new IllegalArgumentException("Cannot update entity.");
 		return entityManager.merge(entity);
 	}
 
 	@Override
-	public final boolean delete(T entity) {
+	public final boolean delete(final T entity) {
 		if (entity == null || entity.getId() == null)
 			throw new IllegalArgumentException("Cannot delete entity.");
 		entityManager.remove(entity);
@@ -52,9 +53,10 @@ public abstract class BaseDaoServiceImpl<T extends GeneratedKeyBaseEntity> imple
 	}
 
 	@Override
-	public final T findById(Long id) {
+	public final T findById(final Long id) {
 		if (id == null || id < 0)
-			throw new IllegalArgumentException("Cannot find entity for ID = " + id);
+			throw new IllegalArgumentException("Cannot find entity for ID = "
+					+ id);
 		return entityManager.find(entityType, id);
 	}
 }

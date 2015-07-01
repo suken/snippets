@@ -12,7 +12,6 @@ import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -34,7 +33,7 @@ public class Login extends UI {
 	private static final long serialVersionUID = -7335473977417116384L;
 
 	@Override
-	protected void init(VaadinRequest request) {
+	protected void init(final VaadinRequest request) {
 		final GridLayout layout = new GridLayout(3, 5);
 
 		final Panel panel = new Panel();
@@ -43,7 +42,9 @@ public class Login extends UI {
 		panel.setStyleName("loginPanel");
 		panel.setWidth("30%");
 
-		final Label top = new Label("<center><h2>Snippets <strong>"+ FontAwesome.CODE.getHtml() +"</strong></h2></center>", ContentMode.HTML);
+		final Label top = new Label("<center><h2>Snippets <strong>"
+				+ FontAwesome.CODE.getHtml() + "</strong></h2></center>",
+				ContentMode.HTML);
 		top.setStyleName("snpt-header");
 		top.setWidth("45%");
 		panelLayout.addComponent(top);
@@ -66,25 +67,15 @@ public class Login extends UI {
 		form.setMargin(false);
 		panelLayout.addComponent(form);
 
-		final Button loginButton = new Button("Login", new Button.ClickListener() {
-			private static final long serialVersionUID = -5071326681572279585L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				login(userNameField.getValue(), passwordField.getValue());
-			}
-		});
+		final Button loginButton = new Button("Login",
+				(event) ->{login(userNameField.getValue(),
+						passwordField.getValue());});
 		loginButton.setStyleName("loginButton");
 		form.addComponent(loginButton);
 
-		final Button registerButton = new Button("Register", new Button.ClickListener() {
-			private static final long serialVersionUID = -8164303717542148830L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				new Notification("Under construction", Type.HUMANIZED_MESSAGE).show(Page.getCurrent());
-			}
-		});
+		final Button registerButton = new Button("Register",
+				(event) -> {new Notification("Under construction",
+						Type.HUMANIZED_MESSAGE).show(Page.getCurrent());});
 		registerButton.setStyleName("loginButton");
 		form.addComponent(registerButton);
 		layout.addComponent(panel, 1, 2, 2, 3);
@@ -94,15 +85,18 @@ public class Login extends UI {
 		vaadinLogo.setDescription("Vaadin");
 		vaadinLogo.setStyleName("logoStyle");
 		bottom.addComponent(vaadinLogo);
-		final Label springLogo = new Label(FontAwesome.LEAF.getHtml(), ContentMode.HTML);
+		final Label springLogo = new Label(FontAwesome.LEAF.getHtml(),
+				ContentMode.HTML);
 		springLogo.setDescription("Spring");
 		springLogo.setStyleName("logoStyle");
 		bottom.addComponent(springLogo);
-		final Label hibernateLogo = new Label(FontAwesome.DATABASE.getHtml(), ContentMode.HTML);
+		final Label hibernateLogo = new Label(FontAwesome.DATABASE.getHtml(),
+				ContentMode.HTML);
 		hibernateLogo.setDescription("Hibernate");
 		hibernateLogo.setStyleName("logoStyle");
 		bottom.addComponent(hibernateLogo);
-		final Label devLogo = new Label(FontAwesome.COFFEE.getHtml(), ContentMode.HTML);
+		final Label devLogo = new Label(FontAwesome.COFFEE.getHtml(),
+				ContentMode.HTML);
 		devLogo.setDescription("Java");
 		devLogo.setStyleName("logoStyle");
 		bottom.addComponent(devLogo);
@@ -120,7 +114,8 @@ public class Login extends UI {
 
 	private void login(final String userName, final String password) {
 		if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password)) {
-			new Notification("Empty user name.", Type.ERROR_MESSAGE).show(Page.getCurrent());
+			new Notification("Empty user name.", Type.ERROR_MESSAGE).show(Page
+					.getCurrent());
 			return;
 		}
 		UserContext.login(userName, password);
