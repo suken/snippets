@@ -7,8 +7,8 @@ import org.vaadin.aceeditor.AceEditor;
 import org.vaadin.aceeditor.AceMode;
 import org.vaadin.aceeditor.AceTheme;
 
+import com.javashop.snippets.UserContext;
 import com.javashop.snippets.data.Snippet;
-import com.javashop.snippets.data.User;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.navigator.View;
@@ -23,7 +23,6 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -96,7 +95,7 @@ public class SnippetDetailsView extends VerticalLayout implements View {
 		final BeanFieldGroup<Snippet> fieldGroup = new BeanFieldGroup<Snippet>(
 				Snippet.class);
 		final Snippet snippet = new Snippet();
-		snippet.setAuthor(UI.getCurrent().getSession().getAttribute(User.class));
+		snippet.setAuthor(UserContext.getCurrentUser());
 		snippet.setName("");
 		snippet.setDescription("");
 		fieldGroup.setItemDataSource(snippet);
